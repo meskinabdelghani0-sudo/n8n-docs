@@ -20,8 +20,10 @@ jobs:
     steps:
       - name: Set label config
         id: config
+        env:
+          LABEL_NAME: ${{ github.event.label.name }}
         run: |
-          case "${{ github.event.label.name }}" in
+          case "$LABEL_NAME" in
             "block")
               echo "comment=@${{ env.AUTHOR }} Due to a violation of our contributing guidelines, you are now blocked. Please review n8n's [contributing](${{ env.CONTRIBUTING_LINK }}) guidelines." >> $GITHUB_OUTPUT
               echo "should_close=true" >> $GITHUB_OUTPUT
